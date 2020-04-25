@@ -1,4 +1,4 @@
-package com.example.awsimageupload.bucket;
+package com.example.awsimageupload.aws.bucket;
 
 public enum BucketName {
 
