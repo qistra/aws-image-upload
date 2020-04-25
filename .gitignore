@@ -33,3 +33,6 @@ build/
 ### credentials related content ###
 aws-credentials
 application.properties
+
+### Misc. ###
+.DS_Store
