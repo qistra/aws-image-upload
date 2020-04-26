@@ -2,6 +2,7 @@ package com.example.awsimageupload.services;
 
 import com.example.awsimageupload.profile.UserProfile;
 import com.example.awsimageupload.repositories.UserProfileRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,8 +24,23 @@ public class UserProfileService {
         return userProfileRepository.getUserProfiles();
     }
 
-    public void uploadUserProfileImage(UUID userProfileId, MultipartFile file) {
-        //TODO: complete the logic to update UserProfile(userProfileImageLink) in DB
+    public void uploadUserProfileImage(UUID userId, MultipartFile file) {
 
+        if (file.isEmpty()) {
+            throw new IllegalStateException("Cannot upload an empty file " + file.getName());
+        }
+
+        if (!file.getContentType().startsWith("image/")) {
+            throw new IllegalStateException("File must be an image");
+        }
+
+        // check if user exists in DB
+        UserProfile user = getUserProfiles()
+                .stream()
+                .filter(userProfile -> userProfile.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException(String.format("User profile %s not found", userId)));
+
+        userProfileRepository.uploadUserProfileImage(user, file);
     }
 }
