@@ -25,5 +25,6 @@ public class UserProfileService {
 
     public void uploadUserProfileImage(UUID userProfileId, MultipartFile file) {
         //TODO: complete the logic to update UserProfile(userProfileImageLink) in DB
+
     }
 }
