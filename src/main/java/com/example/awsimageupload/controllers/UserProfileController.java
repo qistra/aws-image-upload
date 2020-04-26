@@ -28,12 +28,12 @@ public class UserProfileController {
     }
 
     @PostMapping(
-            path = "{userProfileId}/image/upload",
+            path = "/{userId}/image/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void uploadUserProfileImage(@PathVariable("userProfileId") UUID userProfileId,
+    public void uploadUserProfileImage(@PathVariable("userId") UUID userId,
                                        @RequestParam("file") MultipartFile file) {
-        userProfileService.uploadUserProfileImage(userProfileId, file);
+        userProfileService.uploadUserProfileImage(userId, file);
     }
 }
