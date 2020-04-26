@@ -28,8 +28,8 @@ public class UserProfileRepository {
     }
 
     public void uploadUserProfileImage(UserProfile userProfile, MultipartFile file) {
-        String filePath = String.format("%s/%s", BucketName.PROFILE_IMAGE, userProfile.getUserId());
-        String fileName = String.format("%s-%s", file.getName(), UUID.randomUUID());
+        String filePath = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), userProfile.getUserId());
+        String fileName = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
         Map<String, String> metadata = new HashMap<>();
         metadata.put("Content-Type", file.getContentType());
         metadata.put("Content-Length", String.valueOf(file.getSize()));
