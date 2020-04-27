@@ -13,8 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString
 public class UserProfile {
-    private UUID userId;
-    private String userName;
+    private final UUID userId;
+    private final String userName;
     private String userProfileImageLink; // Amazon S3
 
     @Override
