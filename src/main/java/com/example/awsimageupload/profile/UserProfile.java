@@ -15,7 +15,7 @@ import java.util.UUID;
 public class UserProfile {
     private final UUID userId;
     private final String userName;
-    private String userProfileImageLink; // Amazon S3
+    private String[] userProfileImageLink; // Amazon S3
 
     @Override
     public boolean equals(Object o) {

@@ -35,8 +35,15 @@ public class UserProfileRepository {
         metadata.put("Content-Length", String.valueOf(file.getSize()));
         try {
             fileStore.save(filePath, fileName, Optional.of(metadata), file.getInputStream());
+            userProfile.setUserProfileImageLink(new String[]{filePath, fileName});
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public byte[] downloadUserProfileImage(UserProfile user) {
+        String filePath = user.getUserProfileImageLink()[0];
+        String fileName = user.getUserProfileImageLink()[1];
+        return fileStore.download(filePath, fileName);
     }
 }

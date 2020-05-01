@@ -35,12 +35,22 @@ public class UserProfileService {
         }
 
         // check if user exists in DB
-        UserProfile user = getUserProfiles()
+        UserProfile user = getUserProfileOrThrow(userId);
+
+        userProfileRepository.uploadUserProfileImage(user, file);
+    }
+
+    public byte[] downloadUserProfileImage(UUID userId) {
+        UserProfile user = getUserProfileOrThrow(userId);
+        return userProfileRepository.downloadUserProfileImage(user);
+    }
+
+    private UserProfile getUserProfileOrThrow(UUID userId) {
+        return getUserProfiles()
                 .stream()
                 .filter(userProfile -> userProfile.getUserId().equals(userId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException(String.format("User profile %s not found", userId)));
 
-        userProfileRepository.uploadUserProfileImage(user, file);
     }
 }

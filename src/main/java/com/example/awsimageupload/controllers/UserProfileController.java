@@ -36,4 +36,9 @@ public class UserProfileController {
                                        @RequestParam("file") MultipartFile file) {
         userProfileService.uploadUserProfileImage(userId, file);
     }
+
+    @GetMapping("/{userId}/image/download")
+    public byte[] downloadUserProfileImage(@PathVariable("userId") UUID userId) {
+        return userProfileService.downloadUserProfileImage(userId);
+    }
 }
